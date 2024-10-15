@@ -6,7 +6,5 @@ use Illuminate\Http\Request;
 
 class userController extends Controller
 {
-    public function register() {
-        return "Successful";
-    }
+    //
 }
