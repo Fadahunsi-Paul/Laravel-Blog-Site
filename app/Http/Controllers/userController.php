@@ -13,9 +13,18 @@ class userController extends Controller
             'email'=>['required'],
             'password'=>['required']
         ]);
-        return 'login successful';
+        if(auth()->attempt(['email'=>$loginfields['email'], 'password'=>$loginfields['password']])){
+            $request->session()->regenerate();
+            return redirect('/')->with('success','login successful');
+
+        }
+        return redirect('/')->with('error','Invalid Credentials');
     }
 
+    public function logout(){
+        auth()->logout();
+        return redirect('/');
+    }
 
     public function register(Request $request){
         $fields = $request->validate(
